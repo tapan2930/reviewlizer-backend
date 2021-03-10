@@ -16,7 +16,7 @@ const userRoutes = require("./routes/user")
 const app = express();
 
 // connecting the database
-mongoose.connect("mongodb+srv://admin:admin@cluster0.wykwx.mongodb.net/store?retryWrites=true&w=majority", {
+mongoose.connect("process.env.DATABASE", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -34,9 +34,10 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 
 
-app.get('/',(req,res)=>{
-    res.send("welcome to heroku")
+app.get('/', (req,res)=>{
+    res.send("Well come to heroku")
 })
+
 
 //PORT
 const port = process.env.PORT || 8000;

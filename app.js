@@ -9,8 +9,7 @@ const cookieParser = require("cookie-parser");
 // custom routes
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
-const categoryRoutes = require("./routes/category")
-const productRoutes = require("./routes/product")
+
 
 
 // initialize the express server
@@ -33,8 +32,7 @@ app.use(cors())
 //My Routes
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
-app.use("/api", categoryRoutes);
-app.use("/api", productRoutes);
+
 
 app.get('/',(req,res)=>{
     res.send("welcome to heroku")

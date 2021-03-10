@@ -81,12 +81,3 @@ exports.isAuthenticated = (req,res, next) =>{
   }
   next();
 }
-
-exports.isAdmin = (req,res, next) =>{
-  if(req.profile.role === 0){
-    return res.status(403).json({
-      message: "You are not ADMIN. ACCESS DENIED"
-    })
-  }
-  next();
-}

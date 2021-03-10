@@ -10,12 +10,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
         maxlength: 32,
-        trim: true
+        trim: true,
+        default:"Tapan"
     },
     lastname: {
         type: String,
         maxlength: 32,
-        trim: true
+        trim: true,
+        default:"Patel"
     },
     email: {
         type: String,
@@ -23,21 +25,17 @@ const userSchema = new Schema({
         required: true,
         unique: true,
     },
-    userinfo: {
-        type: String,
-        trim: true
-    },
     // TODO: come back here
     secure_password: {
         type: String,
         required : true,
     },
     salt: String,
-    role: {
-        type: Number,
-        default: 0
+    savedProducts: {
+        type: Array,
+        default: []
     },
-    purchases: {
+    recentlySearchedProducts: {
         type: Array,
         default: []
     }

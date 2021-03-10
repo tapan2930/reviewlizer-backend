@@ -10,18 +10,21 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
 
+//
+let connectionStatus = "null"
 
 
 // initialize the express server
 const app = express();
 
 // connecting the database
-mongoose.connect("process.env.DATABASE", {
+mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 }).then(()=> {
     console.log("DB CONNECTED")
+    connectionStatus = "DB Connected"
 })
 
 // using middleware
@@ -35,7 +38,7 @@ app.use("/api", userRoutes);
 
 
 app.get('/', (req,res)=>{
-    res.send("Well come to heroku")
+    res.send(connectionStatus)
 })
 
 

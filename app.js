@@ -17,7 +17,7 @@ const productRoutes = require("./routes/product")
 const app = express();
 
 // connecting the database
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect("mongodb+srv://admin:admin@cluster0.wykwx.mongodb.net/store?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -36,6 +36,9 @@ app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 
+app.get('/',(req,res)=>{
+    res.send("welcome to heroku")
+})
 
 //PORT
 const port = process.env.PORT || 8000;

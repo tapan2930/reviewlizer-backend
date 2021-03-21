@@ -21,7 +21,7 @@ exports.signup = (req, res) => {
   user.save((err, user) => {
     if (err) {
       return res.status(400).json({
-        err: "Not able to save user to DB",
+        err: err,
       });
     }
 
@@ -47,9 +47,8 @@ exports.signin = (req,res) =>{
         if(err || !user){
            return res.status(400).json({error: "No user found"})
         }
-
         if(!user.autheticate(password)){
-            return res.status(401).json({error: "Email and password do not match"})
+            return res.status(401).json({error: err})
         }
 
         //create token

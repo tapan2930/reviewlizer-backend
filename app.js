@@ -25,6 +25,8 @@ mongoose.connect(process.env.DATABASE, {
 }).then(()=> {
     console.log("DB CONNECTED")
     connectionStatus = "DB Connected"
+}).catch((e)=>{
+    console.log(e)
 })
 
 // using middleware

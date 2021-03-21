@@ -6,19 +6,6 @@ const { v1 : uuidv1 } = require('uuid');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        maxlength: 32,
-        trim: true,
-        default:"Tapan"
-    },
-    lastname: {
-        type: String,
-        maxlength: 32,
-        trim: true,
-        default:"Patel"
-    },
     email: {
         type: String,
         trim: true,
@@ -62,6 +49,7 @@ userSchema.methods = {
     securePassword: function(plainPassword){
         if (!plainPassword) return "";
         try{
+
             return crypto.createHmac('sha256', this.salt)
             .update(plainPassword)
             .digest('hex');

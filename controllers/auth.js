@@ -14,7 +14,7 @@ exports.signup = (req, res) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()){
       return res.status(422).json({
-          error: ` ${errors.array()[0].param} : ${errors.array()[0].msg} `
+        errorMessage: ` ${errors.array()[0].param} : ${errors.array()[0].msg} `
       });
   }
   const user = new User(req.body);
@@ -45,10 +45,10 @@ exports.signin = (req,res) =>{
 
     User.findOne({email}, (err, user) =>{
         if(err || !user){
-           return res.status(400).json({error: "No user found"})
+           return res.status(400).json({errorMessage: "No user found, Please check Email again."})
         }
         if(!user.autheticate(password)){
-            return res.status(401).json({error: err})
+            return res.status(401).json({errorMessage: "Wrong Password, Please Check your Password again"})
         }
 
         //create token

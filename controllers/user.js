@@ -45,16 +45,100 @@ exports.userUpdate = (req,res) =>{
 }
 
 
-// exports.savedProducts = (req, res) =>{
-//         Order.find({user: req.profile._id})
-//         .populate("user", "_id name")
-//         .exec((err,order)=>{
-//             if(err){
-//                 return res.status(400).json({
-//                     error: "No order in this account"
-//                 })
-//             }
+exports.addToSavedProducts = (req, res) =>{
+    console.log("helllllllloooooo",req.body)
+    let product = req.body
+        User.findByIdAndUpdate(
+            {_id: req.profile._id},
+            { $push: { savedProducts: [product] } }, 
+            {new: true, useFindAndModify: false},
+            (err,user)=>{
+                if(err || !user){
+                    return res.status(403).json({
+                        "message": "err: Not UPDATE not completed."
+                    })
+                }
+                user.salt = undefined;
+                user.secure_password = undefined
+                user.updatedAt = undefined
+                user.createdAt = undefined
 
-//             return res.json(order)
-//         })
-// }
+                return res.json(user)
+            }
+
+        )
+}
+
+
+exports.deleteFromSavedProducts = (req, res) =>{
+    
+    let productId = req.body.productId
+        User.findByIdAndUpdate(
+            {_id: req.profile._id},
+            { $pull: { savedProducts: {'id': productId} } }, 
+            {new: true, useFindAndModify: false},
+            (err,user)=>{
+                if(err || !user){
+                    return res.status(403).json({
+                        "message": "err: Not UPDATE not completed."
+                    })
+                }
+                user.salt = undefined;
+                user.secure_password = undefined
+                user.updatedAt = undefined
+                user.createdAt = undefined
+
+                return res.json(user)
+            }
+
+        )
+}
+
+
+exports.addToProductHistory = (req, res) =>{
+    console.log("helllllllloooooo",req.body)
+    let product = req.body
+        User.findByIdAndUpdate(
+            {_id: req.profile._id},
+            { $push: { recentlySearchedProducts: [product] } }, 
+            {new: true, useFindAndModify: false},
+            (err,user)=>{
+                if(err || !user){
+                    return res.status(403).json({
+                        "message": "err: Not UPDATE not completed."
+                    })
+                }
+                user.salt = undefined;
+                user.secure_password = undefined
+                user.updatedAt = undefined
+                user.createdAt = undefined
+                return res.json(user)
+            }
+
+        )
+}
+
+
+exports.deleteFromProductHistory = (req, res) =>{
+    
+    let productId = req.body.productId
+        User.findByIdAndUpdate(
+            {_id: req.profile._id},
+            { $pull: { recentlySearchedProducts: {'id': productId} } }, 
+            {new: true, useFindAndModify: false},
+            (err,user)=>{
+                if(err || !user){
+                    return res.status(403).json({
+                        "message": "err: Not UPDATE not completed."
+                    })
+                }
+                user.salt = undefined;
+                user.secure_password = undefined
+                user.updatedAt = undefined
+                user.createdAt = undefined
+
+                return res.json(user)
+            }
+
+        )
+}
